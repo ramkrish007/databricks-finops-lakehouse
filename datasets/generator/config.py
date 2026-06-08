@@ -1,17 +1,36 @@
 NUM_DEPARTMENTS = 20
-
-NUM_CLOUD_RECORDS = 50000
-
-NUM_SOFTWARE_RECORDS = 5000
-
-NUM_INCIDENT_RECORDS = 10000
-
-DUPLICATE_PERCENTAGE = 0.01
-
-BAD_RECORD_PERCENTAGE = 0.01
-
-UNDERUTILIZED_PERCENTAGE = 0.20
+NUM_DEPARTMENT_CHANGES = 100
 
 OUTPUT_INITIAL_PATH = "../raw/initial"
 
-OUTPUT_INCREMENTAL_PATH = "../raw/incremental"
+DEPARTMENTS = [
+    "Engineering",
+    "Cloud Engineering",
+    "Data Platform",
+    "Security",
+    "DevOps",
+    "IT Operations",
+    "Finance",
+    "Accounting",
+    "Procurement",
+    "Human Resources",
+    "Sales",
+    "Marketing",
+    "Customer Success",
+    "Support",
+    "Legal",
+    "Compliance",
+    "Product Management",
+    "Business Intelligence",
+    "Research and Development",
+    "Executive Office"
+]
+
+LOCATIONS = [
+    "USA",
+    "UK",
+    "Germany",
+    "India",
+    "Singapore",
+    "Australia"
+]
