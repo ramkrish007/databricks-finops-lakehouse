@@ -1,0 +1,20 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Databricks
+.bundle/
+
+# Python
+__pycache__/
+*.pyc
+
+# Mac
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Generated Data
+datasets/raw/

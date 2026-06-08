@@ -1,0 +1,9 @@
+bundle:
+  name: finops-lakehouse
+
+workspace:
+  profile: Ramakrishna
+
+targets:
+  dev:
+    default: true
