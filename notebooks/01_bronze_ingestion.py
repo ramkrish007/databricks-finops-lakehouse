@@ -52,6 +52,7 @@ sources = [
 
     {
         "source_name": "departments",
+        "primary_key": "department_id",
         "file_type": "csv",
         "path":
             "/Volumes/finops/bronze/raw_landing/departments.csv",
@@ -61,6 +62,7 @@ sources = [
 
     {
         "source_name": "department_changes",
+        "primary_key": "department_id",
         "file_type": "csv",
         "path":
             "/Volumes/finops/bronze/raw_landing/department_changes.csv",
@@ -70,6 +72,7 @@ sources = [
 
     {
         "source_name": "software_licenses",
+        "primary_key": "license_id",
         "file_type": "csv",
         "path":
             "/Volumes/finops/bronze/raw_landing/software_licenses.csv",
@@ -79,6 +82,7 @@ sources = [
 
     {
         "source_name": "cloud_usage",
+        "primary_key": "resource_id",
         "file_type": "json",
         "path":
             "/Volumes/finops/bronze/raw_landing/cloud_usage_2026_*.json",
