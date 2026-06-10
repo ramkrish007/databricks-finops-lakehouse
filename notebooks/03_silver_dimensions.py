@@ -286,3 +286,46 @@ print(
     "Cloud Usage Tags:",
     cloud_usage_tags_df.count()
 )
+
+# ==================================================
+# Broadcast Join Demonstration
+# ==================================================
+
+from pyspark.sql.functions import broadcast
+
+fact_df = spark.table(
+    "finops.silver.fact_cloud_usage"
+)
+
+department_df = spark.table(
+    "finops.silver.dim_department"
+)
+
+fact_department_df = (
+
+    fact_df.alias("f")
+
+    .join(
+
+        broadcast(
+            department_df.alias("d")
+        ),
+
+        on="department_id",
+
+        how="left"
+
+    )
+
+)
+
+# ==================================================
+# Validation
+# ==================================================
+
+print(
+    "Joined Records:",
+    fact_department_df.count()
+)
+
+fact_department_df.explain(True)
