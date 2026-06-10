@@ -207,3 +207,82 @@ print(
     "Quarantine Records:",
     quarantine_cloud_usage_df.count()
 )
+
+# ==================================================
+# Build Cloud Usage Tags
+# ==================================================
+
+cloud_usage_tags_df = (
+
+    fact_cloud_usage_dedup_df
+
+    .select(
+        "resource_id",
+        "tags",
+        "ingestion_timestamp",
+        "load_date",
+        "source_file_name"
+    )
+
+)
+
+# ==================================================
+# Explode Tags Array
+# ==================================================
+
+cloud_usage_tags_df = (
+
+    cloud_usage_tags_df
+
+    .withColumn(
+        "tag",
+        explode("tags")
+    )
+
+)
+
+# ==================================================
+# Flatten Tag Structure
+# ==================================================
+
+cloud_usage_tags_df = (
+
+    cloud_usage_tags_df
+
+    .select(
+        "resource_id",
+
+        col("tag.key")
+            .alias("tag_key"),
+
+        col("tag.value")
+            .alias("tag_value"),
+
+        "ingestion_timestamp",
+        "load_date",
+        "source_file_name"
+    )
+
+)
+
+# ==================================================
+# Write Cloud Usage Tags Table
+# ==================================================
+
+(
+    cloud_usage_tags_df.write
+        .format("delta")
+        .mode("overwrite")
+        .saveAsTable(
+            "finops.silver.cloud_usage_tags"
+        )
+)
+
+# ==================================================
+# Validation
+# ==================================================
+
+print(
+    "Cloud Usage Tags:",
+    cloud_usage_tags_df.count()
+)
