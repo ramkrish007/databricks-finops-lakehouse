@@ -31,7 +31,7 @@ dim_department_df = (
     .withColumn(
         "monthly_budget",
         col("monthly_budget")
-            .cast(DecimalType(18,2))
+        .cast(DecimalType(18,2))
     )
 
     .withColumn(
@@ -65,7 +65,7 @@ changes_df = (
     .withColumn(
         "monthly_budget",
         col("monthly_budget")
-            .cast(DecimalType(18,2))
+        .cast(DecimalType(18,2))
     )
 )
 
