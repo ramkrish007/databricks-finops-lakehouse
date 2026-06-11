@@ -479,3 +479,187 @@ gold_underutilized_df = (
             "finops.gold.gold_underutilized_resources"
         )
 )
+
+# ==================================================
+
+# Gold Layer
+
+# Service Cost Summary
+
+# ==================================================
+
+fact_df = spark.table(
+"finops.silver.fact_cloud_usage"
+)
+
+service_summary_df = (
+
+fact_df
+
+.groupBy(
+    "service"
+)
+
+.agg(
+
+    sum(
+        "monthly_cost"
+    ).alias(
+        "total_spend"
+    ),
+
+    countDistinct(
+        "resource_id"
+    ).alias(
+        "resource_count"
+    )
+
+)
+
+)
+
+# ==================================================
+
+# Average Resource Cost
+
+# ==================================================
+
+service_summary_df = (
+
+service_summary_df
+
+.withColumn(
+
+    "avg_resource_cost",
+
+    round(
+
+        col("total_spend")
+        /
+        col("resource_count"),
+
+        2
+
+    )
+
+)
+
+)
+
+# ==================================================
+
+# Spend Percentage
+
+# ==================================================
+
+total_spend = (
+
+service_summary_df
+
+.agg(
+    sum(
+        "total_spend"
+    )
+)
+
+.collect()[0][0]
+
+)
+
+service_summary_df = (
+
+service_summary_df
+
+.withColumn(
+
+    "spend_percentage",
+
+    round(
+
+        (
+            col("total_spend")
+            /
+            total_spend
+        ) * 100,
+
+        2
+
+    )
+
+)
+
+)
+
+# ==================================================
+
+# Service Ranking
+
+# ==================================================
+
+rank_window = Window.orderBy(
+col("total_spend").desc()
+)
+
+service_summary_df = (
+
+service_summary_df
+
+.withColumn(
+
+    "service_rank",
+
+    dense_rank().over(
+        rank_window
+    )
+
+)
+
+)
+
+# ==================================================
+
+# Final Gold Output
+
+# ==================================================
+
+service_summary_df = (
+
+service_summary_df
+
+.select(
+
+    "service",
+
+    "total_spend",
+
+    "resource_count",
+
+    "avg_resource_cost",
+
+    "spend_percentage",
+
+    "service_rank"
+
+)
+
+)
+
+# ==================================================
+
+# Write Gold Table
+
+# ==================================================
+
+(
+service_summary_df.write
+
+    .format("delta")
+
+    .mode("overwrite")
+
+    .saveAsTable(
+        "finops.gold.gold_service_cost_summary"
+    )
+
+)
+
