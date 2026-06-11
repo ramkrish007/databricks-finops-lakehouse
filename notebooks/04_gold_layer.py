@@ -663,3 +663,186 @@ service_summary_df.write
 
 )
 
+# ==================================================
+
+# Gold Layer
+
+# Environment Cost Summary
+
+# ==================================================
+
+fact_df = spark.table(
+"finops.silver.fact_cloud_usage"
+)
+
+environment_summary_df = (
+
+fact_df
+
+.groupBy(
+    "environment"
+)
+
+.agg(
+
+    sum(
+        "monthly_cost"
+    ).alias(
+        "total_spend"
+    ),
+
+    countDistinct(
+        "resource_id"
+    ).alias(
+        "resource_count"
+    )
+
+)
+
+)
+
+# ==================================================
+
+# Average Resource Cost
+
+# ==================================================
+
+environment_summary_df = (
+
+environment_summary_df
+
+.withColumn(
+
+    "avg_resource_cost",
+
+    round(
+
+        col("total_spend")
+        /
+        col("resource_count"),
+
+        2
+
+    )
+
+)
+
+)
+
+# ==================================================
+
+# Spend Percentage
+
+# ==================================================
+
+total_spend = (
+
+environment_summary_df
+
+.agg(
+    sum(
+        "total_spend"
+    )
+)
+
+.collect()[0][0]
+
+)
+
+environment_summary_df = (
+
+environment_summary_df
+
+.withColumn(
+
+    "spend_percentage",
+
+    round(
+
+        (
+            col("total_spend")
+            /
+            total_spend
+        ) * 100,
+
+        2
+
+    )
+
+)
+
+)
+
+# ==================================================
+
+# Environment Ranking
+
+# ==================================================
+
+rank_window = Window.orderBy(
+col("total_spend").desc()
+)
+
+environment_summary_df = (
+
+environment_summary_df
+
+.withColumn(
+
+    "environment_rank",
+
+    dense_rank().over(
+        rank_window
+    )
+
+)
+
+)
+
+# ==================================================
+
+# Final Gold Output
+
+# ==================================================
+
+environment_summary_df = (
+
+environment_summary_df
+
+.select(
+
+    "environment",
+
+    "total_spend",
+
+    "resource_count",
+
+    "avg_resource_cost",
+
+    "spend_percentage",
+
+    "environment_rank"
+
+)
+
+)
+
+# ==================================================
+
+# Write Gold Table
+
+# ==================================================
+
+(
+environment_summary_df.write
+
+    .format("delta")
+
+    .mode("overwrite")
+
+    .saveAsTable(
+        "finops.gold.gold_environment_cost_summary"
+    )
+
+)
+
