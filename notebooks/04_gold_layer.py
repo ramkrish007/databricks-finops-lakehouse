@@ -256,3 +256,226 @@ gold_department_spend_df.write
     )
 
 )
+
+# ==================================================
+# Gold Layer
+# Underutilized Resources Summary
+# ==================================================
+
+fact_df = spark.table(
+    "finops.silver.fact_cloud_usage"
+)
+
+department_df = spark.table(
+    "finops.silver.dim_department"
+)
+
+# ==================================================
+# Join Department Details
+# ==================================================
+
+gold_underutilized_df = (
+
+    fact_df
+
+    .join(
+
+        broadcast(
+
+            department_df.select(
+                "department_id",
+                "department_name"
+            )
+
+        ),
+
+        on="department_id",
+
+        how="left"
+
+    )
+
+)
+
+# ==================================================
+# Resource Health Classification
+# ==================================================
+
+gold_underutilized_df = (
+
+    gold_underutilized_df
+
+    .withColumn(
+
+        "resource_health",
+
+        when(
+
+            (
+                col("cpu_utilization") < 20
+            )
+
+            |
+
+            (
+                col("memory_utilization") < 20
+            ),
+
+            "Underutilized"
+
+        )
+
+        .when(
+
+            (
+                (
+                    col("cpu_utilization") >= 20
+                )
+                &
+                (
+                    col("cpu_utilization") <= 50
+                )
+            )
+
+            |
+
+            (
+                (
+                    col("memory_utilization") >= 20
+                )
+                &
+                (
+                    col("memory_utilization") <= 50
+                )
+            ),
+
+            "Moderate"
+
+        )
+
+        .otherwise(
+            "Healthy"
+        )
+
+    )
+
+)
+
+# ==================================================
+# Potential Savings
+# ==================================================
+
+gold_underutilized_df = (
+
+    gold_underutilized_df
+
+    .withColumn(
+
+        "potential_monthly_savings",
+
+        when(
+
+            col("resource_health")
+            == "Underutilized",
+
+            col("monthly_cost")
+
+        )
+
+        .when(
+
+            col("resource_health")
+            == "Moderate",
+
+            round(
+                col("monthly_cost") * 0.25,
+                2
+            )
+
+        )
+
+        .otherwise(
+            0
+        )
+
+    )
+
+)
+
+# ==================================================
+# Annual Savings
+# ==================================================
+
+gold_underutilized_df = (
+
+    gold_underutilized_df
+
+    .withColumn(
+
+        "potential_annual_savings",
+
+        round(
+
+            col(
+                "potential_monthly_savings"
+            ) * 12,
+
+            2
+
+        )
+
+    )
+
+)
+
+# ==================================================
+# Final Gold Output
+# ==================================================
+
+gold_underutilized_df = (
+
+    gold_underutilized_df
+
+    .select(
+
+        "resource_id",
+
+        "department_id",
+
+        "department_name",
+
+        "service",
+
+        "environment",
+
+        "monthly_cost",
+
+        "cpu_utilization",
+
+        "memory_utilization",
+
+        "resource_health",
+
+        "potential_monthly_savings",
+
+        "potential_annual_savings"
+
+    )
+
+)
+
+# ==================================================
+# Write Gold Table
+# ==================================================
+
+(
+    gold_underutilized_df.write
+
+        .format("delta")
+
+        .mode("overwrite")
+
+        .saveAsTable(
+            "finops.gold.gold_underutilized_resources"
+        )
+)
