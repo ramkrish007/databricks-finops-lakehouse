@@ -846,3 +846,137 @@ environment_summary_df.write
 
 )
 
+# ==================================================
+# Gold Layer
+# Department Waste Summary
+# ==================================================
+
+underutilized_df = spark.table(
+    "finops.gold.gold_underutilized_resources"
+)
+
+# ==================================================
+# Filter Wasteful Resources
+# ==================================================
+
+waste_df = (
+
+    underutilized_df
+
+    .filter(
+        col("resource_health") != "Healthy"
+    )
+
+)
+
+# ==================================================
+# Department Waste Aggregation
+# ==================================================
+
+department_waste_df = (
+
+    waste_df
+
+    .groupBy(
+        "department_name"
+    )
+
+    .agg(
+
+        countDistinct(
+            "resource_id"
+        ).alias(
+            "underutilized_resource_count"
+        ),
+
+        round(
+
+            sum(
+                "potential_monthly_savings"
+            ),
+
+            2
+
+        ).alias(
+            "monthly_waste"
+        ),
+
+        round(
+
+            sum(
+                "potential_annual_savings"
+            ),
+
+            2
+
+        ).alias(
+            "annual_waste"
+        )
+
+    )
+
+)
+
+# ==================================================
+# Waste Ranking
+# ==================================================
+
+rank_window = Window.orderBy(
+    col("annual_waste").desc()
+)
+
+department_waste_df = (
+
+    department_waste_df
+
+    .withColumn(
+
+        "department_waste_rank",
+
+        dense_rank().over(
+            rank_window
+        )
+
+    )
+
+)
+
+# ==================================================
+# Final Gold Output
+# ==================================================
+
+department_waste_df = (
+
+    department_waste_df
+
+    .select(
+
+        "department_name",
+
+        "underutilized_resource_count",
+
+        "monthly_waste",
+
+        "annual_waste",
+
+        "department_waste_rank"
+
+    )
+
+)
+
+# ==================================================
+# Write Gold Table
+# ==================================================
+
+(
+    department_waste_df.write
+
+        .format("delta")
+
+        .mode("overwrite")
+
+        .saveAsTable(
+            "finops.gold.gold_department_waste_summary"
+        )
+)
