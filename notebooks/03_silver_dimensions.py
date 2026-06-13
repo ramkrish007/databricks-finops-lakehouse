@@ -4,7 +4,8 @@ from pyspark.sql.functions import (
     col,
     to_date,
     expr,
-    row_number
+    row_number,
+    explode
 )
 
 from pyspark.sql.window import Window
@@ -175,10 +176,83 @@ valid_cloud_usage_df = (
 (
     valid_cloud_usage_df.write
         .format("delta")
-        .mode("overwrite")
-        .saveAsTable(
-            "finops.silver.fact_cloud_usage"
+        .option(
+            "mergeSchema",
+            "true"
         )
+        .mode("append")
+        .saveAsTable(
+            "finops.silver.fact_cloud_usage_stg"
+        )
+)
+
+spark.sql(
+"""
+MERGE INTO finops.silver.fact_cloud_usage AS target
+USING finops.silver.fact_cloud_usage_stg AS source
+
+ON target.resource_id = source.resource_id
+
+WHEN MATCHED THEN
+UPDATE SET
+    target.department_id      = source.department_id,
+    target.service            = source.service,
+    target.region             = source.region,
+    target.environment        = source.environment,
+    target.instance_type      = source.instance_type,
+    target.monthly_cost       = source.monthly_cost,
+    target.cpu_utilization    = source.cpu_utilization,
+    target.memory_utilization = source.memory_utilization,
+    target.migration_wave     = source.migration_wave,
+    target.project_name       = source.project_name,
+    target.usage_date         = source.usage_date,
+    target.cost_center        = source.cost_center
+
+WHEN NOT MATCHED THEN
+INSERT (
+    resource_id,
+    department_id,
+    service,
+    region,
+    environment,
+    instance_type,
+    monthly_cost,
+    cpu_utilization,
+    memory_utilization,
+    migration_wave,
+    project_name,
+    usage_date,
+    ingestion_timestamp,
+    load_date,
+    source_file_name,
+    cost_center
+)
+VALUES (
+    source.resource_id,
+    source.department_id,
+    source.service,
+    source.region,
+    source.environment,
+    source.instance_type,
+    source.monthly_cost,
+    source.cpu_utilization,
+    source.memory_utilization,
+    source.migration_wave,
+    source.project_name,
+    source.usage_date,
+    source.ingestion_timestamp,
+    source.load_date,
+    source.source_file_name,
+    source.cost_center
+)
+"""
+)
+
+spark.sql(
+"""
+TRUNCATE TABLE
+finops.silver.fact_cloud_usage_stg
+"""
 )
 
 # ==================================================
