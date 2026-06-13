@@ -4,22 +4,17 @@ dbutils.notebook.run(
 )
 
 dbutils.notebook.run(
+    "02_silver_dimensions",
+    0
+)
+
+dbutils.notebook.run(
     "03_silver_dimensions",
     0
 )
 
 dbutils.notebook.run(
-    "03_gold_department_spend",
-    0
-)
-
-dbutils.notebook.run(
-    "04_gold_underutilized_resources",
-    0
-)
-
-dbutils.notebook.run(
-    "05_gold_service_environment",
+    "04_gold_layer",
     0
 )
 
