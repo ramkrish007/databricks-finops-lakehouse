@@ -7,3 +7,42 @@ workspace:
 targets:
   dev:
     default: true
+
+resources:
+
+  jobs:
+
+    finops_end_to_end_pipeline:
+
+      name: finops-end-to-end-pipeline
+
+      tasks:
+
+        - task_key: bronze_ingestion
+
+          notebook_task:
+            notebook_path: notebooks/01_bronze_ingestion
+
+        - task_key: silver_dimensions
+
+          depends_on:
+            - task_key: bronze_ingestion
+
+          notebook_task:
+            notebook_path: notebooks/02_silver_dimensions
+
+        - task_key: silver_fact
+
+          depends_on:
+            - task_key: silver_dimensions
+
+          notebook_task:
+            notebook_path: notebooks/03_silver_dimensions
+
+        - task_key: gold_layer
+
+          depends_on:
+            - task_key: silver_fact
+
+          spark_python_task:
+            python_file: notebooks/04_gold_layer.py
