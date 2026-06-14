@@ -1,0 +1,457 @@
+18:54:00 Info: start pid=57576 version=1.2.1 args="databricks, bundle, deploy, -t, dev, --debug"
+18:54:00 Debug: Found bundle root at /Users/apple/Projects/databricks-finops-lakehouse (file /Users/apple/Projects/databricks-finops-lakehouse/databricks.yml) pid=57576
+18:54:00 Info: Phase: load pid=57576
+18:54:00 Debug: Apply pid=57576 mutator=EntryPoint
+18:54:00 Debug: Apply pid=57576 mutator=scripts.preinit
+18:54:00 Debug: No script defined for preinit, skipping pid=57576 mutator=scripts.preinit
+18:54:00 Debug: Apply pid=57576 mutator=ProcessRootIncludes
+18:54:00 Debug: Apply pid=57576 mutator=VerifyCliVersion
+18:54:00 Debug: Apply pid=57576 mutator=EnvironmentsToTargets
+18:54:00 Debug: Apply pid=57576 mutator=ComputeIdToClusterId
+18:54:00 Debug: Apply pid=57576 mutator=InitializeVariables
+18:54:00 Debug: Apply pid=57576 mutator=DefineDefaultTarget(default)
+18:54:00 Debug: Apply pid=57576 mutator=validate:no_variable_reference_in_resource_key
+18:54:00 Debug: Apply pid=57576 mutator=validate:unique_resource_keys
+18:54:00 Debug: Apply pid=57576 mutator=SelectTarget(dev)
+18:54:00 Debug: Loading dbc-629640cc-a841 profile from /Users/apple/.databrickscfg pid=57576 sdk=true
+18:54:00 Debug: [Local Cache] using cache key: 0d19705c6346732462f077a346b0fa17d36afc11557b30551f56ca7058e3bae0 pid=57576
+18:54:00 Debug: [Local Cache] cache hit pid=57576
+18:54:00 Debug: Resolved cloud from hostname: "AWS" pid=57576 sdk=true
+18:54:00 Debug: Resolved token_audience from host metadata token_federation_default_oidc_audiences: "https://dbc-629640cc-a841.cloud.databricks.com/oidc/v1/token" pid=57576 sdk=true
+18:54:00 Debug: Resolved discovery_url from host metadata: "https://dbc-629640cc-a841.cloud.databricks.com/oidc/.well-known/oauth-authorization-server" pid=57576 sdk=true
+18:54:00 Debug: Apply pid=57576 mutator=<func>
+18:54:00 Debug: Apply pid=57576 mutator=<func>
+18:54:00 Info: Phase: initialize pid=57576
+18:54:00 Debug: Apply pid=57576 mutator=validate:AllResourcesHaveValues
+18:54:00 Debug: Apply pid=57576 mutator=validate:interpolation_in_auth_config
+18:54:00 Debug: Apply pid=57576 mutator=validate:no_interpolation_in_bundle_name
+18:54:00 Debug: Apply pid=57576 mutator=validate:engine
+18:54:00 Debug: Apply pid=57576 mutator=validate:scripts
+18:54:00 Debug: Apply pid=57576 mutator=RewriteSyncPaths
+18:54:00 Debug: Apply pid=57576 mutator=SyncDefaultPath
+18:54:00 Debug: Apply pid=57576 mutator=SyncInferRoot
+18:54:00 Debug: Apply pid=57576 mutator=InitializeCache
+18:54:00 Debug: Apply pid=57576 mutator=PopulateCurrentUser
+18:54:01 Debug: [Local Cache] using cache key: ae460215b44e908e8079eacaecce40a117e8789f85268658756c1290fc3ee71c pid=57576 mutator=PopulateCurrentUser
+18:54:01 Debug: [Local Cache] cache miss, computing pid=57576 mutator=PopulateCurrentUser
+18:54:02 Debug: GET /api/2.0/preview/scim/v2/Me
+< HTTP/2.0 200 OK
+< {
+<   "active": true,
+<   "emails": [
+<     {
+<       "primary": true,
+<       "type": "work",
+<       "value": "rahulsur.suresh@gmail.com"
+<     }
+<   ],
+<   "entitlements": [
+<     {
+<       "value": "allow-cluster-create"
+<     },
+<     {
+<       "value": "allow-instance-pool-create"
+<     }
+<   ],
+<   "groups": [
+<     {
+<       "$ref": "Groups/87625981701903",
+<       "display": "users",
+<       "type": "direct",
+<       "value": "87625981701903"
+<     },
+<     {
+<       "$ref": "Groups/85597911368563",
+<       "display": "admins",
+<       "type": "direct",
+<       "value": "85597911368563"
+<     }
+<   ],
+<   "id": "77357006701132",
+<   "schemas": [
+<     "urn:ietf:params:scim:schemas:core:2.0:User",
+<     "urn:ietf:params:scim:schemas:extension:workspace:2.0:User"
+<   ],
+<   "userName": "rahulsur.suresh@gmail.com"
+< } pid=57576 mutator=PopulateCurrentUser sdk=true
+18:54:02 Debug: [Local Cache] computed and stored result pid=57576 mutator=PopulateCurrentUser
+18:54:02 Debug: Apply pid=57576 mutator=LoadGitDetails
+18:54:02 Debug: Apply pid=57576 mutator=ApplySourceLinkedDeploymentPreset
+18:54:02 Debug: Apply pid=57576 mutator=DefineDefaultWorkspaceRoot
+18:54:02 Debug: Apply pid=57576 mutator=ExpandWorkspaceRoot
+18:54:02 Debug: Apply pid=57576 mutator=DefaultWorkspacePaths
+18:54:02 Debug: Apply pid=57576 mutator=PrependWorkspacePrefix
+18:54:02 Debug: Apply pid=57576 mutator=RewriteWorkspacePrefix
+18:54:02 Debug: Apply pid=57576 mutator=CollectEscapeTelemetry
+18:54:02 Debug: Apply pid=57576 mutator=SetVariables
+18:54:02 Debug: Apply pid=57576 mutator=ResolveVariableReferences
+18:54:02 Debug: Apply pid=57576 mutator=ResolveLookupVariables
+18:54:02 Debug: Apply pid=57576 mutator=ResolveVariableReferences
+18:54:02 Debug: Apply pid=57576 mutator=validate:volume-path
+18:54:02 Debug: Apply pid=57576 mutator=ApplyTargetMode
+18:54:02 Debug: Apply pid=57576 mutator=ConfigureWSFS
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=ResolveVariableReferences(resources)
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=LogResourceReferences
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=NormalizePaths
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=TranslatePathsDashboards
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=validate:SingleNodeCluster
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=ResolveVariableReferences(resources)
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=ExpandPipelineGlobPaths
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=MergeJobClusters
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=MergeJobParameters
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=MergeJobTasks
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=MergePipelineClusters
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=MergeApps
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=MergeGrants
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=CaptureUCDependencies
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=ConfigureDashboardSerializedDashboard
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=LoadDBAlertFiles
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=JobClustersFixups
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=ClusterFixups
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=ModelServingEndpointFixups
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=SetRunAs
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=OverrideCompute
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=ApplyPresets
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.dashboards.*, parent_path, /Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/resources)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.dashboards.*, embed_credentials, false)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.volumes.*, volume_type, MANAGED)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.alerts.*, parent_path, /Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/resources)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*, name, Untitled)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*, max_concurrent_runs, 1)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*.schedule, pause_status, UNPAUSED)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*.trigger, pause_status, UNPAUSED)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*.continuous, pause_status, UNPAUSED)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*, queue, map[enabled:{true 4 [] false}])"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*.task[*].dbt_task, schema, default)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*.task[*].for_each_task.task.dbt_task, schema, default)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*.job_clusters[*].new_cluster.workload_type.clients, notebooks, true)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.jobs.*.job_clusters[*].new_cluster.workload_type.clients, jobs, true)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.pipelines.*, edition, ADVANCED)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.pipelines.*, channel, CURRENT)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.sql_warehouses.*, auto_stop_mins, 120)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.sql_warehouses.*, enable_photon, true)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.sql_warehouses.*, max_num_clusters, 1)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.sql_warehouses.*, spot_instance_policy, COST_OPTIMIZED)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.apps.*, description, )"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.clusters.*, autotermination_minutes, 60)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.clusters.*.workload_type.clients, notebooks, true)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator="SetDefaultMutator(resources.clusters.*.workload_type.clients, jobs, true)"
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=DashboardFixups
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=ApplyBundlePermissions
+18:54:02 Debug: Apply pid=57576 mutator=ProcessStaticResources mutator=FixPermissions
+18:54:02 Debug: Apply pid=57576 mutator=PythonMutator(load_resources)
+18:54:02 Debug: Apply pid=57576 mutator=PythonMutator(apply_mutators)
+18:54:02 Debug: Apply pid=57576 mutator=ResolveSelect
+18:54:02 Debug: Apply pid=57576 mutator=validate:required
+18:54:02 Debug: Apply pid=57576 mutator=validate:enum
+18:54:02 Debug: Apply pid=57576 mutator=validate:validate_dashboard_etags
+18:54:02 Debug: Apply pid=57576 mutator=validate:tf_only_references
+18:54:02 Debug: Apply pid=57576 mutator=CheckPermissions
+18:54:02 Debug: Apply pid=57576 mutator=TranslatePaths
+18:54:02 Debug: Apply pid=57576 mutator=PythonWrapperWarning
+18:54:02 Debug: Apply pid=57576 mutator=ApplyArtifactsDynamicVersion
+18:54:02 Debug: Apply pid=57576 mutator=artifacts.Prepare
+18:54:02 Info: No local tasks in databricks.yml config, skipping auto detect pid=57576 mutator=artifacts.Prepare
+18:54:02 Debug: Apply pid=57576 mutator=apps.Validate
+18:54:02 Debug: Apply pid=57576 mutator=ValidateTargetMode
+18:54:02 Debug: Apply pid=57576 mutator=ValidateSharedRootPermissions
+18:54:02 Debug: Apply pid=57576 mutator=metadata.AnnotateJobs
+18:54:02 Debug: Apply pid=57576 mutator=metadata.AnnotatePipelines
+18:54:02 Debug: Apply pid=57576 mutator=scripts.postinit
+18:54:02 Debug: No script defined for postinit, skipping pid=57576 mutator=scripts.postinit
+18:54:02 Debug: GET /api/2.0/workspace/get-status?path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/terraform.tfstate&return_export_info=true
+< HTTP/2.0 200 OK
+< {
+<   "created_at": 1781442669234,
+<   "modified_at": 1781443435450,
+<   "object_id": 4258241502025494,
+<   "object_type": "FILE",
+<   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/terraform.tfstate",
+<   "resource_id": "4258241502025494",
+<   "size": 180
+< } pid=57576 sdk=true
+18:54:02 Debug: GET /api/2.0/workspace/get-status?path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/resources.json&return_export_info=true
+< HTTP/2.0 404 Not Found
+< {
+<   "details": [
+<     {
+<       "@type": "type.googleapis.com/google.rpc.RequestInfo",
+<       "request_id": "e5a47284-6b00-4223-b3d8-8ba290767cd6",
+<       "serving_data": ""
+<     }
+<   ],
+<   "error_code": "RESOURCE_DOES_NOT_EXIST",
+<   "message": "Path (/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/resources.js... (18 more bytes)"
+< } pid=57576 sdk=true
+18:54:02 Debug: non-retriable error: Path (/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/resources.json) doesn't exist. pid=57576 sdk=true
+18:54:03 Debug: GET /api/2.0/workspace-files/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/terraform.tfstate
+< HTTP/2.0 200 OK
+< <Streaming response> pid=57576 sdk=true
+18:54:03 Debug: read terraform.tfstate: terraform.tfstate: remote  state serial=1 lineage="5edc4c02-b1df-c6ff-c89d-ed71ab04ce25" pid=57576
+18:54:03 Info: Available resource state files (from least to most preferred): [terraform.tfstate: remote terraform state serial=1 lineage="5edc4c02-b1df-c6ff-c89d-ed71ab04ce25" /Users/apple/Projects/databricks-finops-lakehouse/.databricks/bundle/dev/terraform/terraform.tfstate: local terraform state serial=1 lineage="5edc4c02-b1df-c6ff-c89d-ed71ab04ce25"] pid=57576
+18:54:03 Debug: Apply pid=57576 mutator=fast_validate(readonly)
+18:54:03 Debug: ApplyParallel pid=57576 mutator=fast_validate(readonly) mutator=validate:job_cluster_key_defined
+18:54:03 Debug: ApplyParallel pid=57576 mutator=fast_validate(readonly) mutator=validate:job_task_cluster_spec
+18:54:03 Debug: ApplyParallel pid=57576 mutator=fast_validate(readonly) mutator=validate:artifact_paths
+18:54:03 Info: Phase: build pid=57576
+18:54:03 Debug: Apply pid=57576 mutator=scripts.prebuild
+18:54:03 Debug: No script defined for prebuild, skipping pid=57576 mutator=scripts.prebuild
+18:54:03 Debug: Apply pid=57576 mutator=artifacts.Build
+18:54:03 Debug: Apply pid=57576 mutator=scripts.postbuild
+18:54:03 Debug: No script defined for postbuild, skipping pid=57576 mutator=scripts.postbuild
+18:54:03 Debug: Apply pid=57576 mutator=ResolveVariableReferences
+18:54:03 Debug: Apply pid=57576 mutator=ResolveVariableReferences(resources)
+18:54:03 Debug: Apply pid=57576 mutator=libraries.ExpandGlobReferences
+18:54:03 Debug: Apply pid=57576 mutator=CheckForSameNameLibraries
+18:54:03 Debug: Apply pid=57576 mutator=SwitchToPatchedWheels
+18:54:03 Debug: Apply pid=57576 mutator=TransformWheelTask
+18:54:03 Debug: Apply pid=57576 mutator=CheckDashboardsModifiedRemotely
+18:54:03 Debug: Apply pid=57576 mutator=SecretScopeFixups
+18:54:03 Debug: Apply pid=57576 mutator=deploy:state-pull
+18:54:03 Info: Opening remote deployment state file pid=57576 mutator=deploy:state-pull
+18:54:03 Debug: GET /api/2.0/workspace/get-status?path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deployment.json&return_export_info=true
+< HTTP/2.0 200 OK
+< {
+<   "created_at": 1781442637527,
+<   "modified_at": 1781443418381,
+<   "object_id": 4258241502025493,
+<   "object_type": "FILE",
+<   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deployment.json",
+<   "resource_id": "4258241502025493",
+<   "size": 1469
+< } pid=57576 mutator=deploy:state-pull sdk=true
+18:54:04 Debug: GET /api/2.0/workspace-files/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deployment.json
+< HTTP/2.0 200 OK
+< <Streaming response> pid=57576 mutator=deploy:state-pull sdk=true
+18:54:04 Info: Local deployment state is the same or newer, ignoring remote state pid=57576 mutator=deploy:state-pull
+18:54:04 Debug: Apply pid=57576 mutator=ValidateGitDetails
+18:54:04 Debug: Apply pid=57576 mutator=ValidateDirectOnlyResources
+18:54:04 Debug: Apply pid=57576 mutator=ValidateLifecycleStarted
+18:54:04 Debug: Apply pid=57576 mutator=check-running-resources
+18:54:04 Info: Phase: deploy pid=57576
+18:54:04 Debug: Apply pid=57576 mutator=scripts.predeploy
+18:54:04 Debug: No script defined for predeploy, skipping pid=57576 mutator=scripts.predeploy
+18:54:04 Debug: Apply pid=57576 mutator=lock:acquire
+18:54:04 Info: Acquiring deployment lock (force: false) pid=57576 mutator=lock:acquire
+18:54:04 Debug: POST /api/2.0/workspace-files/import-file/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock?overwrite=false
+> {
+>   "AcquisitionTime": "2026-06-14T18:54:04.154226+05:30",
+>   "ID": "7610054c-7306-4a43-a88c-3c937bff5231",
+>   "IsForced": false,
+>   "User": "rahulsur.suresh@gmail.com"
+> }
+< HTTP/2.0 200 OK pid=57576 mutator=lock:acquire sdk=true
+18:54:05 Debug: GET /api/2.0/workspace/get-status?path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock&return_export_info=true
+< HTTP/2.0 200 OK
+< {
+<   "created_at": 1781443444407,
+<   "modified_at": 1781443444407,
+<   "object_id": 4258241502025500,
+<   "object_type": "FILE",
+<   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock",
+<   "resource_id": "4258241502025500",
+<   "size": 150
+< } pid=57576 mutator=lock:acquire sdk=true
+18:54:05 Debug: GET /api/2.0/workspace/export?direct_download=true&path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock
+< HTTP/2.0 200 OK
+< <Streaming response> pid=57576 mutator=lock:acquire sdk=true
+18:54:05 Debug: Apply pid=57576 mutator=artifacts.CleanUp
+18:54:06 Debug: POST /api/2.0/workspace/delete
+> {
+>   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/artifacts/.internal",
+>   "recursive": true
+> }
+< HTTP/2.0 200 OK
+< {} pid=57576 mutator=artifacts.CleanUp sdk=true
+18:54:06 Debug: POST /api/2.0/workspace/mkdirs
+> {
+>   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/artifacts/.internal"
+> }
+< HTTP/2.0 200 OK
+< {} pid=57576 mutator=artifacts.CleanUp sdk=true
+18:54:06 Debug: Apply pid=57576 mutator=libraries.Upload
+18:54:06 Debug: Apply pid=57576 mutator=files.Upload
+Uploading bundle files to /Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/files...
+18:54:06 Debug: GET /api/2.0/workspace/get-status?path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/files
+< HTTP/2.0 200 OK
+< {
+<   "object_id": 2164718110719133,
+<   "object_type": "DIRECTORY",
+<   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/files",
+<   "resource_id": "2164718110719133"
+< } pid=57576 mutator=files.Upload sdk=true
+18:54:06 Debug: Path /Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/files has type directory (ID: 2164718110719133) pid=57576 mutator=files.Upload
+18:54:07 Debug: POST /api/2.0/workspace-files/import-file/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/files/deploy.log?overwrite=true
+> 18:54:00 Info: start pid=57576 version=1.2.1 args="databricks, bundle, deploy, -t, dev, --debug"... (19327 more bytes)
+< HTTP/2.0 200 OK pid=57576 mutator=files.Upload sdk=true
+18:54:07 Info: Uploaded bundle files pid=57576 mutator=files.Upload
+18:54:07 Debug: Apply pid=57576 mutator=deploy:state-update
+18:54:07 Info: Loading deployment state from /Users/apple/Projects/databricks-finops-lakehouse/.databricks/bundle/dev/deployment.json pid=57576 mutator=deploy:state-update
+18:54:07 Debug: Apply pid=57576 mutator=deploy:state-push
+18:54:07 Info: Writing local deployment state file to remote state directory pid=57576 mutator=deploy:state-push
+18:54:07 Debug: POST /api/2.0/workspace-files/import-file/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deployment.json?overwrite=true
+> {
+>   "cli_version": "1.2.1",
+>   "files": [
+>     {
+>       "is_notebook": false,
+>       "local_path": "docs/data_model.md"
+>     },
+>     {
+>       "is_notebook": true,
+>       "local_path": "notebooks/02_silver_dimensions.py"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "terraform/.terraform.lock.hcl"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "databricks.yml"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "deploy.log"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "notebooks/04_gold_layer.py"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "requirements.txt"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "terraform/catalog.tf"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": ".github/workflows/ci.yml"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "README.md"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "datasets/generator/generate_incremental_load.py"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "datasets/generator/generate_initial_load.py"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "notebooks/06_pipeline_orchestration.py"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "terraform/variables.tf"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": ".gitignore"
+>     },
+>     {
+>       "is_notebook": false,
+>       "local_path": "datasets/generator/config.py"
+>     },
+>     {
+>       "is_notebook": true,
+>       "local_path": "notebooks/01_bronze_ingestion.py"
+>     },
+>     "... (4 additional elements)"
+>   ],
+>   "id": "f8d8430e-6e0a-4e52-83b6-6cb7ee7cc98a",
+>   "seq": 4,
+>   "timestamp": "2026-06-14T13:24:07.324045Z",
+>   "version": 1
+> }
+< HTTP/2.0 200 OK pid=57576 mutator=deploy:state-push sdk=true
+18:54:07 Debug: Apply pid=57576 mutator=ApplyWorkspaceRootPermissions
+18:54:07 Debug: Apply pid=57576 mutator=trackUsedCompute
+18:54:07 Debug: Apply pid=57576 mutator=deploy:resource_path_mkdir
+18:54:07 Debug: Apply pid=57576 mutator=terraform.Interpolate
+18:54:07 Debug: Apply pid=57576 mutator=terraform.Write
+18:54:07 Debug: Apply pid=57576 mutator=terraform.Plan
+18:54:07 Debug: Using Terraform at /Users/apple/Projects/databricks-finops-lakehouse/.databricks/bundle/dev/bin/terraform pid=57576 mutator=terraform.Plan
+18:54:07 Debug: DATABRICKS_TF_CLI_CONFIG_FILE is not defined pid=57576 mutator=terraform.Plan
+18:54:07 Debug: Environment variables for Terraform: DATABRICKS_HOST, DATABRICKS_ACCOUNT_ID, DATABRICKS_CONFIG_PROFILE, DATABRICKS_AUTH_TYPE, DATABRICKS_CLOUD, DATABRICKS_TOKEN_AUDIENCE, DATABRICKS_DISCOVERY_URL, TMPDIR, DATABRICKS_WORKSPACE_ID, HOME, PATH, DATABRICKS_USER_AGENT_EXTRA pid=57576 mutator=terraform.Plan
+18:54:17 Debug: Planning complete and persisted at /Users/apple/Projects/databricks-finops-lakehouse/.databricks/bundle/dev/terraform/plan
+ pid=57576 mutator=terraform.Plan
+Deploying resources...
+18:54:17 Debug: Apply pid=57576 mutator=terraform.Apply
+Error: terraform apply: exit status 1
+
+Error: cannot create job: Only serverless compute is supported in the workspace.
+
+  with databricks_job.finops_end_to_end_pipeline,
+  on bundle.tf.json line 86, in resource.databricks_job.finops_end_to_end_pipeline:
+  86:       }
+
+
+
+Updating deployment state...
+18:54:25 Debug: POST /api/2.0/workspace-files/import-file/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/terraform.tfstate?overwrite=true
+> {
+>   "check_results": null,
+>   "lineage": "5edc4c02-b1df-c6ff-c89d-ed71ab04ce25",
+>   "outputs": {},
+>   "resources": null,
+>   "serial": 1,
+>   "terraform_version": "1.5.5",
+>   "version": 4
+> }
+< HTTP/2.0 200 OK pid=57576 sdk=true
+18:54:25 Debug: Apply pid=57576 mutator=lock:release
+18:54:25 Info: Releasing deployment lock pid=57576 mutator=lock:release
+18:54:25 Debug: GET /api/2.0/workspace/get-status?path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock&return_export_info=true
+< HTTP/2.0 200 OK
+< {
+<   "created_at": 1781443444407,
+<   "modified_at": 1781443444407,
+<   "object_id": 4258241502025500,
+<   "object_type": "FILE",
+<   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock",
+<   "resource_id": "4258241502025500",
+<   "size": 150
+< } pid=57576 mutator=lock:release sdk=true
+18:54:25 Debug: GET /api/2.0/workspace/get-status?path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock&return_export_info=true
+< HTTP/2.0 200 OK
+< {
+<   "created_at": 1781443444407,
+<   "modified_at": 1781443444407,
+<   "object_id": 4258241502025500,
+<   "object_type": "FILE",
+<   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock",
+<   "resource_id": "4258241502025500",
+<   "size": 150
+< } pid=57576 mutator=lock:release sdk=true
+18:54:26 Debug: GET /api/2.0/workspace/export?direct_download=true&path=/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock
+< HTTP/2.0 200 OK
+< <Streaming response> pid=57576 mutator=lock:release sdk=true
+18:54:26 Debug: POST /api/2.0/workspace/delete
+> {
+>   "path": "/Workspace/Users/rahulsur.suresh@gmail.com/.bundle/finops-lakehouse/dev/state/deploy.lock"
+> }
+< HTTP/2.0 200 OK
+< {} pid=57576 mutator=lock:release sdk=true
+18:54:26 Debug: failed execution pid=57576 exit_code=1
+18:54:27 Debug: POST /telemetry-ext
+> {
+>   "items": null,
+>   "protoLogs": [
+>     "{\"frontend_log_event_id\":\"88a1a554-8854-45ce-a14e-eed667cdaa47\",\"entry\":{\"databricks_cli_log\":{\"... (3066 more bytes)"
+>   ],
+>   "uploadTime": 1781443466626
+> }
+< HTTP/2.0 200 OK
+< {
+<   "errors": null,
+<   "numProtoSuccess": 1,
+<   "numRealtimeSuccess": 0,
+<   "numSuccess": 0
+< } pid=57576 sdk=true
+18:54:27 Debug: All 1 logs uploaded successfully pid=57576
