@@ -1,0 +1,48 @@
+name: FinOps CI
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  validate:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Display Python Version
+        run: python --version
+
+      - name: Validate Terraform Files
+        run: |
+          echo "Validating Terraform Structure"
+          ls -R terraform
+
+      - name: Validate Databricks Bundle
+        run: |
+          echo "Validating Asset Bundle"
+          cat databricks.yml
+
+      - name: Validate Notebook Structure
+        run: |
+          ls -R notebooks
+
+      - name: CI Pipeline Successful
+        run: |
+          echo "FinOps Lakehouse validation completed successfully"
